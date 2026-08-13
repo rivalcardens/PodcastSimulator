@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Junior Podcaster - Multimedia Nusantara School</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-outer: #003a5f;
+      --bg-canvas: #0082c8;
+      --card-white: #ffffff;
+      --btn-green: #72bf44;
+      --btn-green-hover: #5ea336;
+      --btn-yellow: #f59e0b;
+      --text-dark: #1e293b;
+      --text-purple: #6b21a8;
+      --border-radius: 20px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-outer);
+      background-image: 
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 25%),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 25%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+      color: #ffffff;
+      overflow: hidden;
+    }
+
+    /* KANVAS LAYAR 1920x1080 PX (RESPONSIF 16:9) */
+    .game-screen {
+      width: 100%;
+      max-width: 1920px;
+      aspect-ratio: 16 / 9;
+      max-height: 95vh;
+      background: linear-gradient(135deg, #0082c8 0%, #006bb0 100%);
+      border-radius: 28px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 0 40px rgba(255, 255, 255, 0.15);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    .bg-icon {
+      position: absolute;
+      font-size: 3.5rem;
+      opacity: 0.12;
+      pointer-events: none;
+      user-select: none;
+      animation: float 4s ease-in-out infinite alternate;
+    }
+
+    .bg-icon.top-left { top: 30px; left: 40px; animation-delay: 0s; }
+    .bg-icon.top-right { top: 40px; right: 50px; animation-delay: 1s; }
+    .bg-icon.bottom-left { bottom: 40px; left: 50px; animation-delay: 2s; }
+    .bg-icon.bottom-right { bottom: 30px; right: 40px; animation-delay: 1.5s; }
+
+    @keyframes float {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(-15px) rotate(8deg); }
+    }
+
+    .app-card {
+      width: 100%;
+      max-width: 680px;
+      height: 100%;
+      max-height: 840px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      z-index: 2;
+      overflow-y: auto;
+      padding: 10px 10px;
+    }
+
+    .app-header {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .mns-main-logo {
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      background: #ffffff;
+      padding: 4px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      margin: 0 auto 6px auto;
+      display: block;
+      transition: transform 0.3s;
+    }
+
+    .mns-main-logo:hover {
+      transform: scale(1.05) rotate(3deg);
+    }
+
+    .header-bar-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .help-btn {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: #ffffff;
+      border: 2px solid #ffffff;
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+      transition: all 0.2s;
+    }
+
+    .help-btn:hover { transform: translateY(-2px) scale(1.02); }
+    .help-btn:active { transform: scale(0.95); }
+    .help-btn:disabled { background: #cbd5e1; border-color: #94a3b8; cursor: not-allowed; opacity: 0.6; transform: none; }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 10px;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #72bf44, #a3e635);
+      transition: width 0.3s ease;
+    }
+
+    .counter-text {
+      font-size: 1.05rem;
+      font-weight: 800;
+      text-align: left;
+      opacity: 0.95;
+    }
+
+    .content-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .question-title {
+      font-size: 1.7rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .question-sub {
+      font-size: 1.15rem;
+      font-weight: 600;
+      line-height: 1.35;
+      margin-bottom: 18px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.15);
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* MAP JOURNEY STYLING */
+    .journey-container {
+      position: relative;
+      background: rgba(0, 48, 77, 0.45);
+      border: 3px solid rgba(255, 255, 255, 0.35);
+      border-radius: 24px;
+      padding: 15px;
+      margin: 5px 0 10px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 420px;
+      justify-content: space-between;
+      backdrop-filter: blur(5px);
+    }
+
+    .map-path-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .node-wrapper {
+      position: absolute;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+    
+    .node-wrapper:hover {
+        transform: translateY(-2px) scale(1.02);
+    }
+
+    #node-1 { bottom: 30px; right: 60px; }
+    #node-2 { bottom: 130px; left: 60px; }
+    #node-3 { top: 130px; right: 60px; }
+    #node-4 { top: 30px; left: 60px; }
+
+    .node-circle {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background: #003a5f;
+      border: 4px solid #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #ffffff;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .node-label {
+      position: absolute;
+      bottom: 60px;
+      white-space: nowrap;
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--text-dark);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+      border: 2px solid #003a5f;
+      pointer-events: none;
+    }
+
+    .node-wrapper.active .node-circle {
+      background: var(--btn-yellow);
+      border-color: #ffffff;
+      transform: scale(1.12);
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.9);
+    }
+
+    .node-wrapper.locked .node-circle {
+      background: #475569;
+      border-color: #94a3b8;
+      color: #94a3b8;
+    }
+
+    .node-wrapper.completed .node-circle {
+      background: var(--btn-green);
+      border-color: #ffffff;
+    }
+
+    .journey-action-bar {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .btn-pill {
+      width: 100%;
+      background: var(--card-white);
+      color: var(--text-dark);
+      border: none;
+      border-radius: var(--border-radius);
+      padding: 14px 18px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      cursor: pointer;
+      text-align: left;
+      transition: transform 0.15s ease, background-color 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+      line-height: 1.3;
+    }
+
+    .btn-pill:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+    }
+
+    .btn-pill:active { transform: scale(0.98); }
+
+    .btn-pill.selected-opt {
+      background: #d1fadf !important;
+      color: #027a48 !important;
+      border: 2px solid #12b76a;
+    }
+
+    .btn-pill.correct {
+      background: #d1fadf !important;
+      color: #027a48 !important;
+      border: 2px solid #12b76a;
+    }
+
+    .btn-pill.wrong {
+      background: #fee4e2 !important;
+      color: #b42318 !important;
+      border: 2px solid #f04438;
+    }
+
+    .btn-pill.disabled-option {
+      opacity: 0.25;
+      pointer-events: none;
+      background: #e2e8f0;
+    }
+
+    .btn-green {
+      background: linear-gradient(135deg, #72bf44 0%, #5ea336 100%);
+      color: #ffffff;
+      width: 100%;
+      padding: 15px 22px;
+      border: 2px solid #a3e635;
+      border-radius: var(--border-radius);
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+      margin-top: 4px;
+      text-align: center;
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-green:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.3);
+    }
+    
+    .btn-green:active {
+        transform: scale(0.98);
+    }
+
+    .skip-btn {
+      background: none;
+      border: none;
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-top: 8px;
+      cursor: pointer;
+      opacity: 0.85;
+      text-align: center;
+      transition: opacity 0.2s, transform 0.15s ease;
+    }
+
+    .skip-btn:hover { 
+        opacity: 1; 
+        text-decoration: underline; 
+        transform: translateY(-2px) scale(1.02);
+    }
+
+    /* SIMULASI PODCAST NPC STYLING */
+    .npc-box {
+      background: rgba(0, 0, 0, 0.25);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      padding: 15px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .npc-avatar {
+      font-size: 3rem;
+      background: #ffffff;
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      flex-shrink: 0;
+    }
+
+    .npc-dialogue {
+      font-size: 0.95rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .role-selection {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .role-btn {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      color: white;
+      padding: 12px;
+      border-radius: 15px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .role-btn.selected {
+      background: var(--btn-yellow);
+      border-color: #ffffff;
+      color: var(--text-dark);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.5);
+    }
+
+    .sim-results-card {
+      background: rgba(0, 0, 0, 0.25);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .sim-results-score {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--btn-yellow);
+      margin: 10px 0;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    select, textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: var(--border-radius);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      outline: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    textarea { height: 80px; resize: none; }
+
+    .script-box {
+      background: #ffffff;
+      color: var(--text-dark);
+      padding: 14px;
+      border-radius: var(--border-radius);
+      font-size: 0.9rem;
+      line-height: 1.45;
+      margin-bottom: 12px;
+      font-weight: 600;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .end-screen {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .end-title {
+      font-size: 2.6rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      text-shadow: 0 3px 6px rgba(0,0,0,0.3);
+    }
+
+    .icon-circle {
+      width: 105px;
+      height: 105px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.2rem;
+      margin-bottom: 12px;
+      border: 4px solid #ffffff;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .end-subtitle {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .end-score {
+      font-size: 1rem;
+      opacity: 0.95;
+      margin-bottom: 20px;
+    }
+
+    audio { width: 100%; margin-bottom: 12px; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <div class="game-screen">
+    <div class="bg-icon top-left">🎙️</div>
+    <div class="bg-icon top-right">🎧</div>
+    <div class="bg-icon bottom-left">📻</div>
+    <div class="bg-icon bottom-right">🎵</div>
+
+    <div class="app-card">
+      
+      <!-- HEADER PROGRESS & HELP BUTTON -->
+      <div id="header-area" class="app-header hidden">
+        <svg class="mns-main-logo" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="48" fill="#1b2180" />
+          <circle cx="50" cy="50" r="40" fill="#008ce3" />
+          <path d="M 15 50 A 35 35 0 1 0 85 50 A 35 35 0 1 0 15 50" fill="none" stroke="#ffffff" stroke-width="8"/>
+          <rect x="30" y="30" width="8" height="8" fill="#ffffff"/>
+          <rect x="42" y="30" width="8" height="8" fill="#ffffff"/>
+          <rect x="54" y="22" width="8" height="8" fill="#ffffff"/>
+          <rect x="30" y="42" width="8" height="8" fill="#ffffff"/>
+          <rect x="42" y="42" width="8" height="8" fill="#ffffff"/>
+          <rect x="54" y="42" width="8" height="8" fill="#ffffff"/>
+          <rect x="30" y="54" width="8" height="8" fill="#ffffff"/>
+          <rect x="42" y="54" width="8" height="8" fill="#ffffff"/>
+          <rect x="42" y="66" width="8" height="8" fill="#ffffff"/>
+        </svg>
+
+        <div class="header-bar-info">
+          <div class="counter-text" id="counter-display">1/15</div>
+          <button id="help-btn" class="help-btn" onclick="playSfx('click'); useHelp();">💡 Help 50:50 (<span id="help-count">3</span> left)</button>
+        </div>
+
+        <div class="progress-bar-container">
+          <div id="progress-bar" class="progress-bar-fill"></div>
+        </div>
+      </div>
+
+      <!-- HOME MENU -->
+      <div id="stage-home" class="content-area" style="text-align: center;">
+        <svg class="mns-main-logo" style="width: 125px; height: 125px; margin-bottom: 12px;" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="48" fill="#1b2180" />
+          <circle cx="50" cy="50" r="40" fill="#008ce3" />
+          <path d="M 15 50 A 35 35 0 1 0 85 50 A 35 35 0 1 0 15 50" fill="none" stroke="#ffffff" stroke-width="8"/>
+          <rect x="30" y="30" width="8" height="8" fill="#ffffff"/>
+          <rect x="42" y="30" width="8" height="8" fill="#ffffff"/>
+          <rect x="54" y="22" width="8" height="8" fill="#ffffff"/>
+          <rect x="30" y="42" width="8" height="8" fill="#ffffff"/>
+          <rect x="42" y="42" width="8" height="8" fill="#ffffff"/>
+          <rect x="54" y="42" width="8" height="8" fill="#ffffff"/>
+          <rect x="30" y="54" width="8" height="8" fill="#ffffff"/>
+          <rect x="42" y="54" width="8" height="8" fill="#ffffff"/>
+          <rect x="42" y="66" width="8" height="8" fill="#ffffff"/>
+        </svg>
+
+        <div class="question-title" style="font-size: 2.2rem; margin-bottom: 4px;">Junior Podcaster</div>
+        <div style="font-size: 1rem; opacity: 0.95; margin-bottom: 25px; font-weight: 600;">Multimedia Nusantara School</div>
+
+        <button class="btn-green" onclick="playSfx('click'); showMap();">View Journey Map</button>
+        <button class="btn-pill" style="margin-top: 10px; color: var(--text-purple); text-align: center;" onclick="playSfx('click'); showHowToPlay();">How to Play</button>
+      </div>
+
+      <!-- MAP JOURNEY -->
+      <div id="stage-map" class="content-area hidden">
+        <div class="question-title">JOURNEY MAP</div>
+
+        <div class="journey-container">
+          <svg class="map-path-svg" viewBox="0 0 600 370" preserveAspectRatio="none">
+            <path d="M 480 320 C 480 230, 120 250, 120 200 C 120 150, 480 150, 480 90 C 480 40, 120 50, 120 30" fill="none" stroke="#002842" stroke-width="22" stroke-linecap="round" />
+            <path id="unlocked-path" d="M 480 320 C 480 230, 120 250, 120 200 C 120 150, 480 150, 480 90 C 480 40, 120 50, 120 30" fill="none" stroke="#f59e0b" stroke-width="10" stroke-linecap="round" stroke-dasharray="900" stroke-dashoffset="900" style="transition: stroke-dashoffset 0.5s ease;" />
+          </svg>
+
+          <div id="node-1" class="node-wrapper active" onclick="playSfx('click'); selectLevelNode(1);">
+            <div class="node-label">💡 Level 1: Quiz</div>
+            <div class="node-circle" id="circle-1">1</div>
+          </div>
+
+          <div id="node-2" class="node-wrapper locked" onclick="playSfx('click'); selectLevelNode(2);">
+            <div class="node-label">🤖 Level 2: Podcast Sim</div>
+            <div class="node-circle" id="circle-2">🔒</div>
+          </div>
+
+          <div id="node-3" class="node-wrapper locked" onclick="playSfx('click'); selectLevelNode(3);">
+            <div class="node-label">📝 Level 3: Scripting</div>
+            <div class="node-circle" id="circle-3">🔒</div>
+          </div>
+
+          <div id="node-4" class="node-wrapper locked" onclick="playSfx('click'); selectLevelNode(4);">
+            <div class="node-label">🎙️ Level 4: Recording</div>
+            <div class="node-circle" id="circle-4">🔒</div>
+          </div>
+
+          <div class="journey-action-bar">
+            <button id="play-level-btn" class="btn-green" onclick="playSfx('click'); startSelectedLevel();">PLAY LEVEL 1</button>
+          </div>
+        </div>
+
+        <button class="btn-pill" style="color: var(--text-purple); text-align: center;" onclick="playSfx('click'); showHome();">Back to Home</button>
+      </div>
+
+      <!-- HOW TO PLAY -->
+      <div id="stage-howto" class="content-area hidden">
+        <div class="question-title">How to Play</div>
+        <div style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 15px; background: rgba(0, 0, 0, 0.2); padding: 18px; border-radius: var(--border-radius); border: 1px solid rgba(255,255,255,0.2);">
+          1. <b>Level 1 (Quiz):</b> Get at least 8 correct answers to unlock Level 2.<br>
+          2. <b>Level 2 (Podcast Sim):</b> Choose your role (Host/Guest) and practice speaking with Alex the NPC.<br>
+          3. <b>Level 3 (Script):</b> Write your story script to unlock Level 4.<br>
+          4. <b>Level 4 (Record):</b> Read out loud and publish your podcast!
+        </div>
+        <button class="btn-pill" style="color: var(--text-purple); text-align: center;" onclick="playSfx('click'); showHome();">Back to Home</button>
+      </div>
+
+      <!-- STAGE 1: QUIZ -->
+      <div id="stage-quiz" class="content-area hidden">
+        <div class="question-title">Quiz Time</div>
+        <div class="question-sub" id="quiz-question">Question text here...</div>
+
+        <div id="quiz-options"></div>
+
+        <button class="skip-btn" onclick="playSfx('click'); skipQuestion();">Skip Question</button>
+      </div>
+
+      <!-- STAGE 2: PODCAST SIMULATION (NPC) -->
+      <div id="stage-sim" class="content-area hidden">
+        <div class="question-title">Podcast Simulation</div>
+        
+        <div class="npc-box">
+          <div class="npc-avatar">🎧</div>
+          <div class="npc-dialogue" id="npc-text">
+            "Hello! I'm Alex. Welcome to MNS Podcast Studio! Today we will practice podcasting. What role would you like to take?"
+          </div>
+        </div>
+
+        <div id="sim-role-selection">
+          <label>Select Your Role:</label>
+          <div class="role-selection">
+            <button class="role-btn" id="btn-role-host" onclick="playSfx('click'); selectRole('Host');">🎙️ Host</button>
+            <button class="role-btn" id="btn-role-guest" onclick="playSfx('click'); selectRole('Guest');">⭐ Guest</button>
+          </div>
+        </div>
+
+        <div id="sim-options-container" class="hidden">
+          <label id="sim-response-label">Choose your response:</label>
+          <div id="sim-options"></div>
+        </div>
+
+        <!-- SIMULATION RESULTS -->
+        <div id="sim-results" class="hidden">
+          <div class="sim-results-card">
+            <div style="font-size: 1.2rem; font-weight: 700;">Simulation Completed!</div>
+            <div class="sim-results-score" id="sim-score-text">Score: 9 / 9 Points</div>
+            <div style="font-size: 0.9rem; opacity: 0.9;" id="sim-feedback-text">Excellent communication skills! You sound like a real professional!</div>
+          </div>
+
+          <button class="btn-pill" style="color: var(--text-purple); text-align: center;" onclick="playSfx('click'); initSimulation();">🔄 Retry Simulation</button>
+          <button class="btn-green" onclick="playSfx('win'); completeLevel2();">Continue to Level 3</button>
+        </div>
+      </div>
+
+      <!-- STAGE 3: SCRIPTWRITER -->
+      <div id="stage-script" class="content-area hidden">
+        <div class="question-title">Script Writing</div>
+        
+        <label>1. Select Intro:</label>
+        <select id="intro-select" onchange="updateScript()">
+          <option value="Hello everyone! Welcome back to Junior Podcaster at MNS!">Hello everyone! Welcome back to Junior Podcaster at MNS!</option>
+          <option value="Hey friends! It's your favorite host back with another episode!">Hey friends! It's your favorite host back with another episode!</option>
+        </select>
+
+        <label>2. Write Main Story:</label>
+        <textarea id="body-input" oninput="updateScript()" placeholder="Write 2 sentences about your topic..."></textarea>
+
+        <label>3. Select Outro:</label>
+        <select id="outro-select" onchange="updateScript()">
+          <option value="Thank you for listening to MNS Radio! See you next time!">Thank you for listening to MNS Radio! See you next time!</option>
+          <option value="Don't forget to share this episode! Catch you later, bye!">Don't forget to share this episode! Catch you later, bye!</option>
+        </select>
+
+        <div class="script-box" id="script-preview-text">...</div>
+
+        <button class="btn-green" onclick="playSfx('click'); completeLevel3();">Finish Script & Unlock Level 4</button>
+      </div>
+
+      <!-- STAGE 4: RECORDING -->
+      <div id="stage-record" class="content-area hidden">
+        <div class="question-title">Voice Production</div>
+        <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 4px;">Read script aloud:</div>
+
+        <div class="script-box" id="final-script-text">...</div>
+
+        <button id="record-btn" class="btn-pill" style="background: #ff4757; color: white; text-align: center;" onclick="toggleRecording()">🔴 Start Recording</button>
+
+        <audio id="audio-player" controls class="hidden"></audio>
+
+        <button id="publish-btn" class="btn-green hidden" onclick="playSfx('win'); publishPodcast();">Publish Episode</button>
+      </div>
+
+      <!-- WIN SCREEN -->
+      <div id="stage-win" class="end-screen hidden">
+        <div class="end-title">You Win!</div>
+        <div class="icon-circle">🎉</div>
+        <div class="end-subtitle">Congrats Junior Podcaster!</div>
+        <div class="end-score" id="win-score-text">Your total score : 10 out of 15</div>
+
+        <button class="btn-green" onclick="playSfx('click'); showMap();">Back to Map Journey</button>
+      </div>
+
+      <!-- LOST SCREEN -->
+      <div id="stage-lost" class="end-screen hidden">
+        <div class="end-title">You Lost!</div>
+        <div class="icon-circle">🔄</div>
+        <div class="end-subtitle">Quiz Score Too Low</div>
+        <div class="end-score" id="lost-score-text">You got only 3 marks! (Need 8 to unlock Level 2)</div>
+
+        <button class="btn-pill" style="color: var(--text-purple); text-align: center;" onclick="playSfx('click'); showMap();">Back to Map</button>
+        <button class="btn-green" onclick="playSfx('click'); startLevel(1);">Retry Level 1</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // WEB AUDIO API SYSTEM
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    let audioCtx;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new AudioCtx();
+      }
+    }
+
+    function playSfx(type) {
+      initAudio();
+      if (!audioCtx) return;
+
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (type === 'hover') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(440, now);
+        osc.frequency.exponentialRampToValueAtTime(880, now + 0.04);
+        gain.gain.setValueAtTime(0.08, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.04);
+        osc.start(now);
+        osc.stop(now + 0.04);
+      } else if (type === 'click') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(600, now);
+        osc.frequency.exponentialRampToValueAtTime(200, now + 0.08);
+        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.08);
+        osc.start(now);
+        osc.stop(now + 0.08);
+      } else if (type === 'correct') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(523.25, now); 
+        osc.frequency.setValueAtTime(659.25, now + 0.1); 
+        osc.frequency.setValueAtTime(783.99, now + 0.2); 
+        gain.gain.setValueAtTime(0.35, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.35);
+        osc.start(now);
+        osc.stop(now + 0.35);
+      } else if (type === 'wrong') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(220, now);
+        osc.frequency.setValueAtTime(180, now + 0.12);
+        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
+        osc.start(now);
+        osc.stop(now + 0.25);
+      } else if (type === 'help') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(400, now);
+        osc.frequency.exponentialRampToValueAtTime(800, now + 0.15);
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
+        osc.start(now);
+        osc.stop(now + 0.2);
+      } else if (type === 'win') {
+        const notes = [523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((freq, idx) => {
+          const o = audioCtx.createOscillator();
+          const g = audioCtx.createGain();
+          o.connect(g);
+          g.connect(audioCtx.destination);
+          o.type = 'triangle';
+          o.frequency.setValueAtTime(freq, now + idx * 0.1);
+          g.gain.setValueAtTime(0.3, now + idx * 0.1);
+          g.gain.linearRampToValueAtTime(0.01, now + idx * 0.1 + 0.25);
+          o.start(now + idx * 0.1);
+          o.stop(now + idx * 0.1 + 0.25);
+        });
+      }
+    }
+
+    // HOVER SOUND EVENT LISTENER
+    document.addEventListener('mouseover', (e) => {
+      const target = e.target.closest('button, .btn-pill, .btn-green, .node-wrapper, .role-btn');
+      if (target && !target.disabled) {
+        playSfx('hover');
+      }
+    });
+
+    // STATE GAME & VARIABLE
+    let totalScore = 0;
+    let currentQuizIndex = 0;
+    let helpRemaining = 3;
+
+    let isLevel2Unlocked = false;
+    let isLevel3Unlocked = false;
+    let isLevel4Unlocked = false;
+    let selectedLevel = 1;
+
+    // SIMULATION STATE
+    let currentRole = null;
+    let simStep = 0;
+    let simTotalScore = 0;
+
+    const quizData = [
+      { q: "1. What is a podcast?", options: ["A) A comic book to read", "B) An audio show you can listen to", "C) A drawing application", "D) A video game console"], answer: 1 },
+      { q: "2. Which tool is most important to record your voice clearly?", options: ["A) A ruler", "B) A pencil", "C) A school desk", "D) A microphone"], answer: 3 },
+      { q: "3. What is a podcast script?", options: ["A) A text that guides what you say", "B) A picture of a studio", "C) A song played on radio", "D) A ticket to a movie theater"], answer: 0 },
+      { q: "4. What is the 'Intro' of a podcast?", options: ["A) The middle commercial break", "B) The final goodbye", "C) The welcome part at the beginning", "D) The title of the song"], answer: 2 },
+      { q: "5. What is the 'Outro' of a podcast?", options: ["A) The intro music", "B) The guest name", "C) The ending goodbye part", "D) The microphone stand"], answer: 2 },
+      { q: "6. Where is the best place to record your voice?", options: ["A) Next to a loud washing machine", "B) In a quiet room without noise", "C) In a busy playground", "D) Outside during a rainstorm"], answer: 1 },
+      { q: "7. What is a 'Guest' in a podcast?", options: ["A) The person who cleans the studio", "B) The microphone stand", "C) A computer app", "D) A special person invited to talk"], answer: 3 },
+      { q: "8. What should you do before clicking Record?", options: ["A) Sleep for 10 minutes", "B) Test your microphone and voice", "C) Turn on a loud electric fan", "D) Throw away your script"], answer: 1 },
+      { q: "9. What do we call one single podcast recording?", options: ["A) A folder", "B) A website", "C) A book chapter", "D) An episode"], answer: 3 },
+      { q: "10. What does a Podcast Host do?", options: ["A) Leads the talk and greets listeners", "B) Fixes broken tables", "C) Draws cartoons", "D) Sells snacks"], answer: 0 },
+      { q: "11. How should you speak into the microphone?", options: ["A) Scream very loudly", "B) Whisper so nobody hears", "C) Speak clearly and nicely", "D) Talk super fast without stopping"], answer: 2 },
+      { q: "12. What is a podcast 'Topic'?", options: ["A) The color of your room", "B) The main story or subject you talk about", "C) The price of your shoes", "D) The clock on the wall"], answer: 1 },
+      { q: "13. Who are the 'Listeners'?", options: ["A) The studio microphones", "B) The teachers grading exams", "C) The people who enjoy hearing your podcast", "D) The batteries inside a computer"], answer: 2 },
+      { q: "14. Why do we add sound effects (SFX) like applause?", options: ["A) To make the microphone turn off", "B) To delete your recording", "C) To make the room dark", "D) To make the story more fun"], answer: 3 },
+      { q: "15. How do you make people like your podcast channel?", options: ["A) Make interesting episodes regularly", "B) Change your name every day", "C) Never practice your script", "D) Record only once a year"], answer: 0 }
+    ];
+
+    const simData = {
+      Host: [
+        {
+          npc: "Awesome! You picked Host. First, welcome the listeners and warmly introduce Alex as your special guest!",
+          options: [
+            { text: "Welcome back everyone to MNS Radio! Today we have an amazing guest, Alex!", pts: 3 },
+            { text: "Hi everyone! I'm here today with my friend Alex.", pts: 2 },
+            { text: "Hey guys, Alex is here with us today.", pts: 1 }
+          ],
+          npcReply: "Thanks for the warm welcome! What topic are we going to discuss today?"
+        },
+        {
+          npc: "Now, ask Alex an engaging question about their favorite hobby at school!",
+          options: [
+            { text: "Alex, could you share what your favorite school hobby is and why you love it?", pts: 3 },
+            { text: "What do you like doing at school, Alex?", pts: 2 },
+            { text: "So Alex, tell us about your hobby.", pts: 1 }
+          ],
+          npcReply: "I love reading books and building computer animations! It's super exciting!"
+        },
+        {
+          npc: "Great question! Now wrap up the episode with an inspiring closing statement.",
+          options: [
+            { text: "Thank you for joining us, Alex! Thanks for listening everyone, see you next time!", pts: 3 },
+            { text: "Thanks Alex! Good night everyone and stay tuned!", pts: 2 },
+            { text: "Alright that's all for today, thanks Alex. Bye!", pts: 1 }
+          ],
+          npcReply: "You did a fantastic job hosting this show!"
+        }
+      ],
+      Guest: [
+        {
+          npc: "Awesome! You picked Guest. Alex says: 'Welcome to MNS Radio! Could you introduce yourself to our listeners?'",
+          options: [
+            { text: "Hello everyone! I'm a Junior Podcaster at MNS, and I'm super excited to be here!", pts: 3 },
+            { text: "Hi Alex! I'm a student at MNS, nice to meet you all.", pts: 2 },
+            { text: "Hey! I'm here to talk today.", pts: 1 }
+          ],
+          npcReply: "Great to have you here! First question: What is the coolest thing you learned this week?"
+        },
+        {
+          npc: "Alex asks: 'What is the most exciting thing you learned this week?'",
+          options: [
+            { text: "I learned how to write an engaging script and produce clear audio recordings!", pts: 3 },
+            { text: "I learned some cool stuff about podcasting and making audio.", pts: 2 },
+            { text: "I learned how podcasts work.", pts: 1 }
+          ],
+          npcReply: "That sounds amazing! Audio production is such a valuable skill!"
+        },
+        {
+          npc: "Alex asks: 'Thanks for coming! Do you have any final advice for our listeners at home?'",
+          options: [
+            { text: "Never be afraid to practice and share your creative ideas! Keep exploring!", pts: 3 },
+            { text: "Just keep practicing every day and stay creative!", pts: 2 },
+            { text: "Have fun listening to podcasts!", pts: 1 }
+          ],
+          npcReply: "Inspiring words! Thanks for being an awesome guest!"
+        }
+      ]
+    };
+
+    let mediaRecorder, audioChunks = [], isRecording = false, audioBlob = null;
+
+    function hideAll() {
+      document.getElementById('header-area').classList.add('hidden');
+      document.getElementById('stage-home').classList.add('hidden');
+      document.getElementById('stage-map').classList.add('hidden');
+      document.getElementById('stage-howto').classList.add('hidden');
+      document.getElementById('stage-quiz').classList.add('hidden');
+      document.getElementById('stage-sim').classList.add('hidden');
+      document.getElementById('stage-script').classList.add('hidden');
+      document.getElementById('stage-record').classList.add('hidden');
+      document.getElementById('stage-win').classList.add('hidden');
+      document.getElementById('stage-lost').classList.add('hidden');
+    }
+
+    function showHome() {
+      hideAll();
+      document.getElementById('stage-home').classList.remove('hidden');
+    }
+
+    function showHowToPlay() {
+      hideAll();
+      document.getElementById('stage-howto').classList.remove('hidden');
+    }
+
+    function showMap() {
+      hideAll();
+      updateMapNodesUI();
+      document.getElementById('stage-map').classList.remove('hidden');
+    }
+
+    function selectLevelNode(lvl) {
+      if (lvl === 2 && !isLevel2Unlocked) {
+        alert("Pass Level 1 Quiz with at least 8 marks to unlock Level 2!");
+        return;
+      }
+      if (lvl === 3 && !isLevel3Unlocked) {
+        alert("Finish NPC Podcast Simulation in Level 2 to unlock Level 3!");
+        return;
+      }
+      if (lvl === 4 && !isLevel4Unlocked) {
+        alert("Finish writing your script in Level 3 to unlock Level 4!");
+        return;
+      }
+
+      selectedLevel = lvl;
+      updateMapNodesUI();
+    }
+
+    function updateMapNodesUI() {
+      const n1 = document.getElementById('node-1');
+      const c1 = document.getElementById('circle-1');
+      n1.className = "node-wrapper " + (selectedLevel === 1 ? "active" : "completed");
+      c1.innerText = "1";
+
+      const n2 = document.getElementById('node-2');
+      const c2 = document.getElementById('circle-2');
+      if (isLevel2Unlocked) {
+        n2.className = "node-wrapper " + (selectedLevel === 2 ? "active" : "completed");
+        c2.innerText = "2";
+      } else {
+        n2.className = "node-wrapper locked";
+        c2.innerText = "🔒";
+      }
+
+      const n3 = document.getElementById('node-3');
+      const c3 = document.getElementById('circle-3');
+      if (isLevel3Unlocked) {
+        n3.className = "node-wrapper " + (selectedLevel === 3 ? "active" : "completed");
+        c3.innerText = "3";
+      } else {
+        n3.className = "node-wrapper locked";
+        c3.innerText = "🔒";
+      }
+
+      const n4 = document.getElementById('node-4');
+      const c4 = document.getElementById('circle-4');
+      if (isLevel4Unlocked) {
+        n4.className = "node-wrapper " + (selectedLevel === 4 ? "active" : "completed");
+        c4.innerText = "4";
+      } else {
+        n4.className = "node-wrapper locked";
+        c4.innerText = "🔒";
+      }
+
+      const path = document.getElementById('unlocked-path');
+      if (isLevel4Unlocked) path.style.strokeDashoffset = "0";
+      else if (isLevel3Unlocked) path.style.strokeDashoffset = "300";
+      else if (isLevel2Unlocked) path.style.strokeDashoffset = "600";
+      else path.style.strokeDashoffset = "900";
+
+      document.getElementById('play-level-btn').innerText = `PLAY LEVEL ${selectedLevel}`;
+    }
+
+    function startSelectedLevel() {
+      startLevel(selectedLevel);
+    }
+
+    function startLevel(lvl) {
+      if (lvl === 1) {
+        hideAll();
+        totalScore = 0;
+        currentQuizIndex = 0;
+        helpRemaining = 3;
+        updateHelpUI();
+        document.getElementById('header-area').classList.remove('hidden');
+        document.getElementById('stage-quiz').classList.remove('hidden');
+        loadQuizQuestion();
+      } else if (lvl === 2) {
+        hideAll();
+        document.getElementById('stage-sim').classList.remove('hidden');
+        initSimulation();
+      } else if (lvl === 3) {
+        hideAll();
+        document.getElementById('stage-script').classList.remove('hidden');
+        updateScript();
+      } else if (lvl === 4) {
+        hideAll();
+        document.getElementById('stage-record').classList.remove('hidden');
+      }
+    }
+
+    /* LEVEL 2: PODCAST SIMULATION LOGIC */
+    function initSimulation() {
+      currentRole = null;
+      simStep = 0;
+      simTotalScore = 0;
+      document.getElementById('sim-role-selection').classList.remove('hidden');
+      document.getElementById('sim-options-container').classList.add('hidden');
+      document.getElementById('sim-results').classList.add('hidden');
+      document.getElementById('btn-role-host').classList.remove('selected');
+      document.getElementById('btn-role-guest').classList.remove('selected');
+      document.getElementById('npc-text').innerText = '"Hello! I\'m Alex. Welcome to MNS Podcast Studio! Today we will practice podcasting. What role would you like to take?"';
+    }
+
+    function selectRole(role) {
+      currentRole = role;
+      document.getElementById('btn-role-host').classList.toggle('selected', role === 'Host');
+      document.getElementById('btn-role-guest').classList.toggle('selected', role === 'Guest');
+      
+      document.getElementById('sim-role-selection').classList.add('hidden');
+      document.getElementById('sim-options-container').classList.remove('hidden');
+      
+      simStep = 0;
+      simTotalScore = 0;
+      loadSimStep();
+    }
+
+    function loadSimStep() {
+      const currentData = simData[currentRole][simStep];
+      document.getElementById('npc-text').innerText = `"${currentData.npc}"`;
+
+      const optsContainer = document.getElementById('sim-options');
+      optsContainer.innerHTML = '';
+
+      currentData.options.forEach((optObj) => {
+        const btn = document.createElement('button');
+        btn.className = 'btn-pill';
+        // Tampilkan teks opsi saja tanpa nilai poin eksplisit
+        btn.innerText = optObj.text;
+        btn.onclick = () => chooseSimOption(optObj.pts, btn);
+        optsContainer.appendChild(btn);
+      });
+    }
+
+    function chooseSimOption(points, btn) {
+      const allBtns = document.querySelectorAll('#sim-options .btn-pill');
+      allBtns.forEach(b => b.style.pointerEvents = 'none');
+
+      playSfx('correct');
+      btn.classList.add('selected-opt');
+      simTotalScore += points;
+
+      setTimeout(() => {
+        const currentData = simData[currentRole][simStep];
+        document.getElementById('npc-text').innerText = `"${currentData.npcReply}"`;
+        simStep++;
+
+        setTimeout(() => {
+          if (simStep < simData[currentRole].length) {
+            loadSimStep();
+          } else {
+            showSimResults();
+          }
+        }, 1500);
+
+      }, 600);
+    }
+
+    function showSimResults() {
+      document.getElementById('sim-options-container').classList.add('hidden');
+      document.getElementById('sim-results').classList.remove('hidden');
+      document.getElementById('npc-text').innerText = '"Great job completing the simulation with me!"';
+
+      document.getElementById('sim-score-text').innerText = `Score: ${simTotalScore} / 9 Points`;
+      
+      let feedback = "Great effort! You are getting better at podcasting!";
+      if (simTotalScore >= 8) feedback = "🌟 Excellent! Outstanding communication and hosting skills!";
+      else if (simTotalScore >= 6) feedback = "👍 Good job! Very natural and engaging dialogue!";
+      
+      document.getElementById('sim-feedback-text').innerText = feedback;
+    }
+
+    function completeLevel2() {
+      playSfx('win');
+      isLevel3Unlocked = true;
+      selectedLevel = 3;
+      showMap();
+    }
+
+    /* LEVEL 1: QUIZ LOGIC */
+    function updateHelpUI() {
+      const helpBtn = document.getElementById('help-btn');
+      document.getElementById('help-count').innerText = helpRemaining;
+      helpBtn.disabled = helpRemaining <= 0;
+    }
+
+    function useHelp() {
+      if (helpRemaining <= 0) return;
+
+      playSfx('help');
+      const q = quizData[currentQuizIndex];
+      const correctIndex = q.answer;
+      const optionsBtns = document.querySelectorAll('#quiz-options .btn-pill');
+
+      let wrongIndices = [];
+      optionsBtns.forEach((btn, idx) => {
+        if (idx !== correctIndex && !btn.classList.contains('disabled-option')) {
+          wrongIndices.push(idx);
+        }
+      });
+
+      if (wrongIndices.length < 2) return;
+
+      wrongIndices.sort(() => Math.random() - 0.5);
+      const toDisable = wrongIndices.slice(0, 2);
+
+      toDisable.forEach(idx => {
+        optionsBtns[idx].classList.add('disabled-option');
+      });
+
+      helpRemaining--;
+      updateHelpUI();
+    }
+
+    function loadQuizQuestion() {
+      const q = quizData[currentQuizIndex];
+      
+      document.getElementById('counter-display').innerText = `${currentQuizIndex + 1}/15`;
+      document.getElementById('progress-bar').style.width = `${((currentQuizIndex + 1) / 15) * 100}%`;
+      document.getElementById('quiz-question').innerText = q.q;
+
+      const optsContainer = document.getElementById('quiz-options');
+      optsContainer.innerHTML = '';
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'btn-pill';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(idx, q.answer, btn);
+        optsContainer.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(selected, correct, btn) {
+      const allBtns = document.querySelectorAll('#quiz-options .btn-pill');
+      allBtns.forEach(b => b.style.pointerEvents = 'none');
+
+      if (selected === correct) {
+        playSfx('correct');
+        btn.classList.add('correct');
+        totalScore++;
+      } else {
+        playSfx('wrong');
+        btn.classList.add('wrong');
+        allBtns[correct].classList.add('correct');
+      }
+
+      setTimeout(() => {
+        nextQuestion();
+      }, 800);
+    }
+
+    function skipQuestion() {
+      nextQuestion();
+    }
+
+    function nextQuestion() {
+      currentQuizIndex++;
+      if (currentQuizIndex < quizData.length) {
+        loadQuizQuestion();
+      } else {
+        finishQuiz();
+      }
+    }
+
+    function finishQuiz() {
+      hideAll();
+      if (totalScore >= 8) {
+        playSfx('win');
+        isLevel2Unlocked = true;
+        selectedLevel = 2;
+        showMap();
+      } else {
+        playSfx('wrong');
+        document.getElementById('stage-lost').classList.remove('hidden');
+        document.getElementById('lost-score-text').innerText = `You got only ${totalScore} marks! (Need 8 to unlock Level 2)`;
+      }
+    }
+
+    /* LEVEL 3: SCRIPTWRITER LOGIC */
+    function updateScript() {
+      const intro = document.getElementById('intro-select').value;
+      const body = document.getElementById('body-input').value.trim() || '[Write your story here...]';
+      const outro = document.getElementById('outro-select').value;
+
+      const text = `"${intro} ${body} ${outro}"`;
+      document.getElementById('script-preview-text').innerText = text;
+      document.getElementById('final-script-text').innerText = text;
+    }
+
+    function completeLevel3() {
+      if (!document.getElementById('body-input').value.trim()) {
+        alert("Write your story first before finishing Level 3!");
+        return;
+      }
+      playSfx('win');
+      isLevel4Unlocked = true;
+      selectedLevel = 4;
+      showMap();
+    }
+
+    /* LEVEL 4: RECORDING LOGIC */
+    async function toggleRecording() {
+      playSfx('click');
+      const recordBtn = document.getElementById('record-btn');
+
+      if (!isRecording) {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          mediaRecorder = new MediaRecorder(stream);
+          audioChunks = [];
+
+          mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+          mediaRecorder.onstop = () => {
+            audioBlob = new Blob(audioChunks, { type: 'audio/mp3' });
+            const player = document.getElementById('audio-player');
+            player.src = URL.createObjectURL(audioBlob);
+            player.classList.remove('hidden');
+          };
+
+          mediaRecorder.start();
+          isRecording = true;
+          recordBtn.innerText = "⏹️ Stop Recording";
+        } catch (err) {
+          alert("Microphone access required!");
+        }
+      } else {
+        mediaRecorder.stop();
+        isRecording = false;
+        recordBtn.innerText = "🔄 Re-record Voice";
+        document.getElementById('publish-btn').classList.remove('hidden');
+      }
+    }
+
+    function publishPodcast() {
+      hideAll();
+      document.getElementById('stage-win').classList.remove('hidden');
+      document.getElementById('win-score-text').innerText = `Your total Quiz score : ${totalScore} out of 15`;
+    }
+  </script>
+</body>
+</html>
