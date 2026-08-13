@@ -37,7 +37,6 @@
       overflow: hidden;
     }
 
-    /* KANVAS LAYAR 1920x1080 PX (RESPONSIF 16:9) */
     .game-screen {
       width: 100%;
       max-width: 1920px;
@@ -186,20 +185,20 @@
       border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    /* MAP JOURNEY STYLING */
     .journey-container {
       position: relative;
-      background: rgba(0, 48, 77, 0.45);
-      border: 3px solid rgba(255, 255, 255, 0.35);
+      background-image: linear-gradient(rgba(0, 30, 60, 0.35), rgba(0, 30, 60, 0.35)), url('https://png.pngtree.com/thumb_back/fh260/background/20241231/pngtree-anchor-fm-podcast-cover-design-image_16532254.jpg');
+      background-size: cover;
+      background-position: center;
+      border: 3px solid rgba(255, 255, 255, 0.5);
       border-radius: 24px;
       padding: 15px;
       margin: 5px 0 10px 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      height: 420px;
-      justify-content: space-between;
-      backdrop-filter: blur(5px);
+      height: 380px;
+      box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
     }
 
     .map-path-svg {
@@ -226,21 +225,22 @@
         transform: translateY(-2px) scale(1.02);
     }
 
-    #node-1 { bottom: 30px; right: 60px; }
-    #node-2 { bottom: 130px; left: 60px; }
-    #node-3 { top: 130px; right: 60px; }
-    #node-4 { top: 30px; left: 60px; }
+    #node-1 { bottom: 20px; right: 40px; }
+    #node-2 { bottom: 90px; left: 40px; }
+    #node-3 { top: 160px; right: 40px; }
+    #node-4 { top: 90px; left: 40px; }
+    #node-5 { top: 20px; right: 40px; }
 
     .node-circle {
-      width: 55px;
-      height: 55px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       background: #003a5f;
       border: 4px solid #ffffff;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: 800;
       color: #ffffff;
       box-shadow: 0 8px 16px rgba(0,0,0,0.4);
@@ -249,13 +249,13 @@
 
     .node-label {
       position: absolute;
-      bottom: 60px;
+      bottom: 55px;
       white-space: nowrap;
       background: rgba(255, 255, 255, 0.95);
       color: var(--text-dark);
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 10px;
+      font-size: 0.7rem;
       font-weight: 800;
       box-shadow: 0 4px 10px rgba(0,0,0,0.25);
       border: 2px solid #003a5f;
@@ -281,10 +281,8 @@
     }
 
     .journey-action-bar {
-      position: relative;
-      z-index: 3;
       width: 100%;
-      margin-top: auto;
+      margin-bottom: 6px;
     }
 
     .btn-pill {
@@ -465,7 +463,7 @@
       margin-bottom: 4px;
     }
 
-    select, textarea {
+    select, textarea, input[type="text"] {
       width: 100%;
       padding: 12px;
       border-radius: var(--border-radius);
@@ -490,6 +488,51 @@
       font-weight: 600;
       box-shadow: inset 0 2px 6px rgba(0,0,0,0.08);
     }
+
+    .mixer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .mixer-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid #ffffff;
+      color: #ffffff;
+      padding: 10px;
+      border-radius: 12px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .mixer-btn:hover { background: rgba(255, 255, 255, 0.35); }
+    .mixer-btn.active { background: var(--btn-yellow); color: var(--text-dark); }
+
+    /* LEVEL 5 COVER DESIGN PREVIEW STYLING */
+    .cover-card-preview {
+      width: 100%;
+      aspect-ratio: 1/1;
+      max-height: 210px;
+      border-radius: 20px;
+      margin: 0 auto 12px auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      text-align: center;
+      border: 3px solid #ffffff;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .cover-theme-neon { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); color: #ffffff; }
+    .cover-theme-retro { background: linear-gradient(135deg, #11998e, #38ef7d); color: #ffffff; }
+    .cover-theme-dark { background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: #00f2fe; }
 
     .end-screen {
       text-align: center;
@@ -565,7 +608,7 @@
         </svg>
 
         <div class="header-bar-info">
-          <div class="counter-text" id="counter-display">1/15</div>
+          <div class="counter-text" id="counter-display">1/30</div>
           <button id="help-btn" class="help-btn" onclick="playSfx('click'); useHelp();">💡 Help 50:50 (<span id="help-count">3</span> left)</button>
         </div>
 
@@ -604,8 +647,8 @@
 
         <div class="journey-container">
           <svg class="map-path-svg" viewBox="0 0 600 370" preserveAspectRatio="none">
-            <path d="M 480 320 C 480 230, 120 250, 120 200 C 120 150, 480 150, 480 90 C 480 40, 120 50, 120 30" fill="none" stroke="#002842" stroke-width="22" stroke-linecap="round" />
-            <path id="unlocked-path" d="M 480 320 C 480 230, 120 250, 120 200 C 120 150, 480 150, 480 90 C 480 40, 120 50, 120 30" fill="none" stroke="#f59e0b" stroke-width="10" stroke-linecap="round" stroke-dasharray="900" stroke-dashoffset="900" style="transition: stroke-dashoffset 0.5s ease;" />
+            <path d="M 500 330 C 450 250, 100 270, 100 210 C 100 150, 500 170, 500 110 C 500 50, 100 70, 500 30" fill="none" stroke="rgba(255, 255, 255, 0.3)" stroke-width="22" stroke-linecap="round" />
+            <path id="unlocked-path" d="M 500 330 C 450 250, 100 270, 100 210 C 100 150, 500 170, 500 110 C 500 50, 100 70, 500 30" fill="none" stroke="#f59e0b" stroke-width="10" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" style="transition: stroke-dashoffset 0.5s ease;" />
           </svg>
 
           <div id="node-1" class="node-wrapper active" onclick="playSfx('click'); selectLevelNode(1);">
@@ -624,13 +667,18 @@
           </div>
 
           <div id="node-4" class="node-wrapper locked" onclick="playSfx('click'); selectLevelNode(4);">
-            <div class="node-label">🎙️ Level 4: Recording</div>
+            <div class="node-label">🎚️ Level 4: Sound Mixing</div>
             <div class="node-circle" id="circle-4">🔒</div>
           </div>
 
-          <div class="journey-action-bar">
-            <button id="play-level-btn" class="btn-green" onclick="playSfx('click'); startSelectedLevel();">PLAY LEVEL 1</button>
+          <div id="node-5" class="node-wrapper locked" onclick="playSfx('click'); selectLevelNode(5);">
+            <div class="node-label">🎨 Level 5: Cover Design</div>
+            <div class="node-circle" id="circle-5">🔒</div>
           </div>
+        </div>
+
+        <div class="journey-action-bar">
+          <button id="play-level-btn" class="btn-green" onclick="playSfx('click'); startSelectedLevel();">PLAY LEVEL 1</button>
         </div>
 
         <button class="btn-pill" style="color: var(--text-purple); text-align: center;" onclick="playSfx('click'); showHome();">Back to Home</button>
@@ -640,10 +688,11 @@
       <div id="stage-howto" class="content-area hidden">
         <div class="question-title">How to Play</div>
         <div style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 15px; background: rgba(0, 0, 0, 0.2); padding: 18px; border-radius: var(--border-radius); border: 1px solid rgba(255,255,255,0.2);">
-          1. <b>Level 1 (Quiz):</b> Get at least 8 correct answers to unlock Level 2.<br>
-          2. <b>Level 2 (Podcast Sim):</b> Choose your role (Host/Guest) and practice speaking with Alex the NPC.<br>
+          1. <b>Level 1 (Quiz):</b> Answer 30 questions! Get at least 16 correct marks to unlock Level 2.<br>
+          2. <b>Level 2 (Podcast Sim):</b> Practice speaking with Alex. Get at least 10/15 points to pass!<br>
           3. <b>Level 3 (Script):</b> Write your story script to unlock Level 4.<br>
-          4. <b>Level 4 (Record):</b> Read out loud and publish your podcast!
+          4. <b>Level 4 (Sound Mixer):</b> Mix BGM & Sound Effects.<br>
+          5. <b>Level 5 (Cover Design):</b> Design your cover art and launch your channel!
         </div>
         <button class="btn-pill" style="color: var(--text-purple); text-align: center;" onclick="playSfx('click'); showHome();">Back to Home</button>
       </div>
@@ -682,16 +731,15 @@
           <div id="sim-options"></div>
         </div>
 
-        <!-- SIMULATION RESULTS -->
         <div id="sim-results" class="hidden">
           <div class="sim-results-card">
             <div style="font-size: 1.2rem; font-weight: 700;">Simulation Completed!</div>
-            <div class="sim-results-score" id="sim-score-text">Score: 9 / 9 Points</div>
-            <div style="font-size: 0.9rem; opacity: 0.9;" id="sim-feedback-text">Excellent communication skills! You sound like a real professional!</div>
+            <div class="sim-results-score" id="sim-score-text">Score: 0 / 15 Points</div>
+            <div style="font-size: 0.9rem; opacity: 0.9;" id="sim-feedback-text">Need at least 10 points to unlock Level 3!</div>
           </div>
 
           <button class="btn-pill" style="color: var(--text-purple); text-align: center;" onclick="playSfx('click'); initSimulation();">🔄 Retry Simulation</button>
-          <button class="btn-green" onclick="playSfx('win'); completeLevel2();">Continue to Level 3</button>
+          <button id="sim-continue-btn" class="btn-green hidden" onclick="playSfx('win'); completeLevel2();">Continue to Level 3</button>
         </div>
       </div>
 
@@ -719,26 +767,58 @@
         <button class="btn-green" onclick="playSfx('click'); completeLevel3();">Finish Script & Unlock Level 4</button>
       </div>
 
-      <!-- STAGE 4: RECORDING -->
+      <!-- STAGE 4: STUDIO MIXING -->
       <div id="stage-record" class="content-area hidden">
-        <div class="question-title">Voice Production</div>
-        <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 4px;">Read script aloud:</div>
+        <div class="question-title">Studio Sound Mixing</div>
+        <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 4px;">Your Final Script Preview:</div>
 
         <div class="script-box" id="final-script-text">...</div>
 
-        <button id="record-btn" class="btn-pill" style="background: #ff4757; color: white; text-align: center;" onclick="toggleRecording()">🔴 Start Recording</button>
+        <label>1. Add Studio Background Music (BGM):</label>
+        <div class="mixer-grid">
+          <button class="mixer-btn" id="bgm-1" onclick="playBgm('upbeat', this)">🎵 Upbeat Pop</button>
+          <button class="mixer-btn" id="bgm-2" onclick="playBgm('chill', this)">🎧 Chill Lo-Fi</button>
+        </div>
 
-        <audio id="audio-player" controls class="hidden"></audio>
+        <label>2. Test Sound Effects (SFX):</label>
+        <div class="mixer-grid">
+          <button class="mixer-btn" onclick="playSfx('applause')">👏 Applause</button>
+          <button class="mixer-btn" onclick="playSfx('chime')">🔔 Studio Chime</button>
+        </div>
 
-        <button id="publish-btn" class="btn-green hidden" onclick="playSfx('win'); publishPodcast();">Publish Episode</button>
+        <button class="btn-green" onclick="playSfx('win'); completeLevel4();">Finish Mix & Unlock Level 5</button>
+      </div>
+
+      <!-- STAGE 5: COVER DESIGN & LAUNCH -->
+      <div id="stage-cover" class="content-area hidden">
+        <div class="question-title">Cover Art & Launch</div>
+        
+        <div class="cover-card-preview cover-theme-neon" id="cover-preview-box">
+          <div style="font-size: 2.2rem;" id="cover-icon-display">🎙️</div>
+          <div style="font-size: 1.1rem; font-weight: 800; margin-top: 4px;" id="cover-title-display">Junior Podcaster</div>
+          <div style="font-size: 0.75rem; opacity: 0.9;" id="cover-subtitle-display">Multimedia Nusantara School</div>
+        </div>
+
+        <label>1. Podcast Title:</label>
+        <input type="text" id="cover-title-input" value="Junior Podcaster" oninput="updateCoverPreview()">
+
+        <label>2. Choose Visual Theme:</label>
+        <div class="mixer-grid">
+          <button class="mixer-btn active" id="theme-neon-btn" onclick="setCoverTheme('neon', this)">🌈 Neon Vibrant</button>
+          <button class="mixer-btn" id="theme-retro-btn" onclick="setCoverTheme('retro', this)">🌿 Fresh Emerald</button>
+          <button class="mixer-btn" id="theme-dark-btn" onclick="setCoverTheme('dark', this)">🌃 Deep Space</button>
+        </div>
+
+        <button class="btn-green" onclick="playSfx('win'); publishPodcast();">🚀 Launch Official Podcast</button>
       </div>
 
       <!-- WIN SCREEN -->
       <div id="stage-win" class="end-screen hidden">
-        <div class="end-title">You Win!</div>
+        <div class="end-title">Official Launch!</div>
         <div class="icon-circle">🎉</div>
-        <div class="end-subtitle">Congrats Junior Podcaster!</div>
-        <div class="end-score" id="win-score-text">Your total score : 10 out of 15</div>
+        <div class="end-subtitle">Congratulations Junior Podcaster!</div>
+        <div style="font-size: 0.9rem; margin-bottom: 15px; opacity: 0.9;">You have successfully completed all 5 levels and published your official podcast channel at MNS!</div>
+        <div class="end-score" id="win-score-text">Your Quiz Score : 20 out of 30</div>
 
         <button class="btn-green" onclick="playSfx('click'); showMap();">Back to Map Journey</button>
       </div>
@@ -748,7 +828,7 @@
         <div class="end-title">You Lost!</div>
         <div class="icon-circle">🔄</div>
         <div class="end-subtitle">Quiz Score Too Low</div>
-        <div class="end-score" id="lost-score-text">You got only 3 marks! (Need 8 to unlock Level 2)</div>
+        <div class="end-score" id="lost-score-text">You got only 5 marks! (Need 16 to unlock Level 2)</div>
 
         <button class="btn-pill" style="color: var(--text-purple); text-align: center;" onclick="playSfx('click'); showMap();">Back to Map</button>
         <button class="btn-green" onclick="playSfx('click'); startLevel(1);">Retry Level 1</button>
@@ -761,6 +841,8 @@
     // WEB AUDIO API SYSTEM
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
     let audioCtx;
+    let activeBgmOsc = null;
+    let activeBgmGain = null;
 
     function initAudio() {
       if (!audioCtx) {
@@ -811,14 +893,28 @@
         gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
         osc.start(now);
         osc.stop(now + 0.25);
-      } else if (type === 'help') {
+      } else if (type === 'applause') {
+        const notes = [400, 600, 800, 1200];
+        notes.forEach((f, i) => {
+          const o = audioCtx.createOscillator();
+          const g = audioCtx.createGain();
+          o.connect(g);
+          g.connect(audioCtx.destination);
+          o.type = 'sine';
+          o.frequency.setValueAtTime(f, now + i * 0.05);
+          g.gain.setValueAtTime(0.15, now + i * 0.05);
+          g.gain.linearRampToValueAtTime(0.01, now + i * 0.05 + 0.2);
+          o.start(now + i * 0.05);
+          o.stop(now + i * 0.05 + 0.2);
+        });
+      } else if (type === 'chime') {
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(400, now);
-        osc.frequency.exponentialRampToValueAtTime(800, now + 0.15);
+        osc.frequency.setValueAtTime(987.77, now);
+        osc.frequency.setValueAtTime(1318.51, now + 0.12);
         gain.gain.setValueAtTime(0.3, now);
-        gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.4);
         osc.start(now);
-        osc.stop(now + 0.2);
+        osc.stop(now + 0.4);
       } else if (type === 'win') {
         const notes = [523.25, 659.25, 783.99, 1046.50];
         notes.forEach((freq, idx) => {
@@ -836,15 +932,39 @@
       }
     }
 
-    // HOVER SOUND EVENT LISTENER
+    function playBgm(style, btn) {
+      initAudio();
+      document.querySelectorAll('.mixer-btn').forEach(b => b.classList.remove('active'));
+
+      if (activeBgmOsc) {
+        activeBgmGain.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+        setTimeout(() => { activeBgmOsc.stop(); activeBgmOsc = null; }, 100);
+      }
+
+      btn.classList.add('active');
+      const now = audioCtx.currentTime;
+      activeBgmOsc = audioCtx.createOscillator();
+      activeBgmGain = audioCtx.createGain();
+      activeBgmOsc.connect(activeBgmGain);
+      activeBgmGain.connect(audioCtx.destination);
+
+      activeBgmOsc.type = style === 'upbeat' ? 'triangle' : 'sine';
+      activeBgmOsc.frequency.setValueAtTime(style === 'upbeat' ? 329.63 : 261.63, now);
+      
+      activeBgmGain.gain.setValueAtTime(0.24, now);
+      activeBgmGain.gain.linearRampToValueAtTime(0.02, now + 1.8);
+
+      activeBgmOsc.start(now);
+      activeBgmOsc.stop(now + 1.8);
+    }
+
     document.addEventListener('mouseover', (e) => {
-      const target = e.target.closest('button, .btn-pill, .btn-green, .node-wrapper, .role-btn');
+      const target = e.target.closest('button, .btn-pill, .btn-green, .node-wrapper, .role-btn, .mixer-btn');
       if (target && !target.disabled) {
         playSfx('hover');
       }
     });
 
-    // STATE GAME & VARIABLE
     let totalScore = 0;
     let currentQuizIndex = 0;
     let helpRemaining = 3;
@@ -852,9 +972,9 @@
     let isLevel2Unlocked = false;
     let isLevel3Unlocked = false;
     let isLevel4Unlocked = false;
+    let isLevel5Unlocked = false;
     let selectedLevel = 1;
 
-    // SIMULATION STATE
     let currentRole = null;
     let simStep = 0;
     let simTotalScore = 0;
@@ -874,37 +994,70 @@
       { q: "12. What is a podcast 'Topic'?", options: ["A) The color of your room", "B) The main story or subject you talk about", "C) The price of your shoes", "D) The clock on the wall"], answer: 1 },
       { q: "13. Who are the 'Listeners'?", options: ["A) The studio microphones", "B) The teachers grading exams", "C) The people who enjoy hearing your podcast", "D) The batteries inside a computer"], answer: 2 },
       { q: "14. Why do we add sound effects (SFX) like applause?", options: ["A) To make the microphone turn off", "B) To delete your recording", "C) To make the room dark", "D) To make the story more fun"], answer: 3 },
-      { q: "15. How do you make people like your podcast channel?", options: ["A) Make interesting episodes regularly", "B) Change your name every day", "C) Never practice your script", "D) Record only once a year"], answer: 0 }
+      { q: "15. How do you make people like your podcast channel?", options: ["A) Make interesting episodes regularly", "B) Change your name every day", "C) Never practice your script", "D) Record only once a year"], answer: 0 },
+      { q: "16. What is the benefit of keeping a steady tone while speaking?", options: ["A) It makes you sound confident and clear", "B) It makes the microphone break", "C) It turns off the audio recorder", "D) It deletes your background music"], answer: 0 },
+      { q: "17. What should you avoid eating right before recording?", options: ["A) Plain warm water", "B) Sticky chocolates or cold milk drinks", "C) Fresh crisp apples", "D) Healthy green vegetables"], answer: 1 },
+      { q: "18. What does 'Audio Editing' mean?", options: ["A) Cutting unwanted noise and adjusting volume", "B) Printing paper documents", "C) Buying a new microphone online", "D) Painting a studio wall"], answer: 0 },
+      { q: "19. Why should you pause briefly between questions?", options: ["A) To let your guest think and reply comfortably", "B) Because your computer crashed", "C) To fall asleep on stage", "D) To confuse your listeners"], answer: 0 },
+      { q: "20. What is 'Background Noise'?", options: ["A) Soft intro music you selected", "B) Unwanted sounds like traffic or wind", "C) Your own clear voice", "D) The episode title"], answer: 1 },
+      { q: "21. How far should your mouth be from the microphone?", options: ["A) About 5-10 centimeters away", "B) Touching your teeth to the metal", "C) Across the room 5 meters away", "D) Inside your school backpack"], answer: 0 },
+      { q: "22. What is a 'Co-Host'?", options: ["A) A second person who hosts the show together with you", "B) A fan who listens at home", "C) The studio custodian", "D) An advertisement popup"], answer: 0 },
+      { q: "23. Why do we write notes before starting an interview?", options: ["A) To remember key points and ask good questions", "B) To read every word without eye contact", "C) To fold them into paper airplanes", "D) To fill up room trash cans"], answer: 0 },
+      { q: "24. What does 'Publishing' an episode mean?", options: ["A) Making your audio available for people to listen to", "B) Deleting your files forever", "C) Keeping it secret on your device", "D) Formatting your hard drive"], answer: 0 },
+      { q: "25. Which feeling helps you connect best with your audience?", options: ["A) Enthusiasm and friendliness", "B) Anger and loudness", "C) Extreme boredom", "D) Complete silence"], answer: 0 },
+      { q: "26. What is the main purpose of an Interview Podcast?", options: ["A) To explore guest stories and share knowledge", "B) To argue endlessly", "C) To play loud video game sounds", "D) To count numbers from 1 to 100"], answer: 0 },
+      { q: "27. What is a Pop Filter used for?", options: ["A) To reduce popping sounds from words with 'P' or 'B'", "B) To change your voice pitch to a robot", "C) To make sound travel through walls", "D) To glow bright in the dark"], answer: 0 },
+      { q: "28. Why is listening carefully to your guest important?", options: ["A) So you can ask meaningful follow-up questions", "B) So you can interrupt them constantly", "C) So you can start drawing doodles", "D) So you can leave the room"], answer: 0 },
+      { q: "29. What is 'Royalty-Free Music'?", options: ["A) Music you can legally use in your podcast", "B) Music made only for kings and queens", "C) Songs that cost thousands of dollars", "D) Broken audio files"], answer: 0 },
+      { q: "30. What makes a great Junior Podcaster?", options: ["A) Good preparation, clear speaking, and curiosity", "B) Owning 10 expensive microphones", "C) Speaking as fast as possible", "D) Never writing a script"], answer: 0 }
     ];
 
     const simData = {
       Host: [
         {
-          npc: "Awesome! You picked Host. First, welcome the listeners and warmly introduce Alex as your special guest!",
+          npc: "Awesome! You picked Host. Step 1: Welcome the listeners and warmly introduce Alex as your special guest!",
           options: [
             { text: "Welcome back everyone to MNS Radio! Today we have an amazing guest, Alex!", pts: 3 },
             { text: "Hi everyone! I'm here today with my friend Alex.", pts: 2 },
             { text: "Hey guys, Alex is here with us today.", pts: 1 }
           ],
-          npcReply: "Thanks for the warm welcome! What topic are we going to discuss today?"
+          npcReply: "Thanks for the warm welcome! What exciting topic are we going to discuss today?"
         },
         {
-          npc: "Now, ask Alex an engaging question about their favorite hobby at school!",
+          npc: "Step 2: State today's topic and ask Alex about their favorite school activity!",
           options: [
-            { text: "Alex, could you share what your favorite school hobby is and why you love it?", pts: 3 },
-            { text: "What do you like doing at school, Alex?", pts: 2 },
-            { text: "So Alex, tell us about your hobby.", pts: 1 }
+            { text: "Today we are exploring school life! Alex, could you share what your favorite activity is?", pts: 3 },
+            { text: "We are talking about school. What do you like doing at school, Alex?", pts: 2 },
+            { text: "So Alex, tell us what you do at school.", pts: 1 }
           ],
-          npcReply: "I love reading books and building computer animations! It's super exciting!"
+          npcReply: "I love working on digital animation and recording voiceovers in the media room!"
         },
         {
-          npc: "Great question! Now wrap up the episode with an inspiring closing statement.",
+          npc: "Step 3: Ask a creative follow-up question about how Alex got started with that hobby!",
           options: [
-            { text: "Thank you for joining us, Alex! Thanks for listening everyone, see you next time!", pts: 3 },
-            { text: "Thanks Alex! Good night everyone and stay tuned!", pts: 2 },
-            { text: "Alright that's all for today, thanks Alex. Bye!", pts: 1 }
+            { text: "That sounds fascinating! How did you first get interested in digital animation?", pts: 3 },
+            { text: "Cool! Was it easy or hard when you started doing that?", pts: 2 },
+            { text: "Nice! How long have you been doing that?", pts: 1 }
           ],
-          npcReply: "You did a fantastic job hosting this show!"
+          npcReply: "My teacher showed us a short cartoon clip last year, and I immediately wanted to create my own!"
+        },
+        {
+          npc: "Step 4: Acknowledge Alex's answer and ask for one tip for beginners listening at home!",
+          options: [
+            { text: "That's so inspiring! What is one useful advice you would give to beginners at home?", pts: 3 },
+            { text: "Awesome! Do you have any tips for kids who want to try it?", pts: 2 },
+            { text: "Great story! Any advice for listeners?", pts: 1 }
+          ],
+          npcReply: "Start simple, don't worry about perfection, and practice a little bit every day!"
+        },
+        {
+          npc: "Step 5: Perfect! Now wrap up the podcast with a warm and inspiring farewell message.",
+          options: [
+            { text: "Thank you so much Alex! Thanks for tuning in everyone, keep learning and see you next time!", pts: 3 },
+            { text: "Thanks Alex for coming! Good night everyone and stay tuned!", pts: 2 },
+            { text: "Alright that's all for today, thanks Alex. Bye everyone!", pts: 1 }
+          ],
+          npcReply: "You did an incredible job hosting this episode! Absolutely professional!"
         }
       ],
       Guest: [
@@ -913,32 +1066,48 @@
           options: [
             { text: "Hello everyone! I'm a Junior Podcaster at MNS, and I'm super excited to be here!", pts: 3 },
             { text: "Hi Alex! I'm a student at MNS, nice to meet you all.", pts: 2 },
-            { text: "Hey! I'm here to talk today.", pts: 1 }
+            { text: "Hey! I'm here to talk on the podcast today.", pts: 1 }
           ],
-          npcReply: "Great to have you here! First question: What is the coolest thing you learned this week?"
+          npcReply: "Great to have you here! First question: What is the most exciting project you worked on recently?"
         },
         {
-          npc: "Alex asks: 'What is the most exciting thing you learned this week?'",
+          npc: "Alex asks: 'What is the most exciting project you worked on recently?'",
           options: [
-            { text: "I learned how to write an engaging script and produce clear audio recordings!", pts: 3 },
-            { text: "I learned some cool stuff about podcasting and making audio.", pts: 2 },
-            { text: "I learned how podcasts work.", pts: 1 }
+            { text: "I recently created a audio story script and learned how to edit sound effects!", pts: 3 },
+            { text: "I worked on a podcast assignment with my classmates at school.", pts: 2 },
+            { text: "I did a school project about sound recording.", pts: 1 }
           ],
-          npcReply: "That sounds amazing! Audio production is such a valuable skill!"
+          npcReply: "That sounds amazing! Audio production is such a valuable skill to learn!"
         },
         {
-          npc: "Alex asks: 'Thanks for coming! Do you have any final advice for our listeners at home?'",
+          npc: "Alex asks: 'How do you overcome feeling nervous before speaking into a microphone?'",
           options: [
-            { text: "Never be afraid to practice and share your creative ideas! Keep exploring!", pts: 3 },
-            { text: "Just keep practicing every day and stay creative!", pts: 2 },
-            { text: "Have fun listening to podcasts!", pts: 1 }
+            { text: "I take deep breaths, smile, and remember that practicing helps build confidence!", pts: 3 },
+            { text: "I take a sip of water and read my script carefully.", pts: 2 },
+            { text: "I just try not to think about it too much.", pts: 1 }
           ],
-          npcReply: "Inspiring words! Thanks for being an awesome guest!"
+          npcReply: "Deep breathing is a wonderful technique! It always works for me too."
+        },
+        {
+          npc: "Alex asks: 'What is your dream topic to explore in your future podcast episodes?'",
+          options: [
+            { text: "I would love to interview inspiring scientists, artists, and young innovators!", pts: 3 },
+            { text: "I want to talk about sports, technology, and fun school games.", pts: 2 },
+            { text: "Maybe talking about music or hobbies.", pts: 1 }
+          ],
+          npcReply: "Those topics will definitely attract lots of enthusiastic listeners!"
+        },
+        {
+          npc: "Alex asks: 'Thanks for coming! Do you have any final words for our young audience at home?'",
+          options: [
+            { text: "Never be afraid to raise your voice, share your unique ideas, and keep creating!", pts: 3 },
+            { text: "Keep practicing every day and stay creative in everything you do!", pts: 2 },
+            { text: "Have fun listening to MNS Radio! Bye everyone!", pts: 1 }
+          ],
+          npcReply: "Inspiring words! Thank you so much for being an outstanding guest!"
         }
       ]
     };
-
-    let mediaRecorder, audioChunks = [], isRecording = false, audioBlob = null;
 
     function hideAll() {
       document.getElementById('header-area').classList.add('hidden');
@@ -949,6 +1118,7 @@
       document.getElementById('stage-sim').classList.add('hidden');
       document.getElementById('stage-script').classList.add('hidden');
       document.getElementById('stage-record').classList.add('hidden');
+      document.getElementById('stage-cover').classList.add('hidden');
       document.getElementById('stage-win').classList.add('hidden');
       document.getElementById('stage-lost').classList.add('hidden');
     }
@@ -971,15 +1141,19 @@
 
     function selectLevelNode(lvl) {
       if (lvl === 2 && !isLevel2Unlocked) {
-        alert("Pass Level 1 Quiz with at least 8 marks to unlock Level 2!");
+        alert("Pass Level 1 Quiz with at least 16 marks to unlock Level 2!");
         return;
       }
       if (lvl === 3 && !isLevel3Unlocked) {
-        alert("Finish NPC Podcast Simulation in Level 2 to unlock Level 3!");
+        alert("Get at least 10 points in Level 2 Podcast Simulation to unlock Level 3!");
         return;
       }
       if (lvl === 4 && !isLevel4Unlocked) {
         alert("Finish writing your script in Level 3 to unlock Level 4!");
+        return;
+      }
+      if (lvl === 5 && !isLevel5Unlocked) {
+        alert("Mix your audio background in Level 4 to unlock Level 5!");
         return;
       }
 
@@ -1023,11 +1197,22 @@
         c4.innerText = "🔒";
       }
 
+      const n5 = document.getElementById('node-5');
+      const c5 = document.getElementById('circle-5');
+      if (isLevel5Unlocked) {
+        n5.className = "node-wrapper " + (selectedLevel === 5 ? "active" : "completed");
+        c5.innerText = "5";
+      } else {
+        n5.className = "node-wrapper locked";
+        c5.innerText = "🔒";
+      }
+
       const path = document.getElementById('unlocked-path');
-      if (isLevel4Unlocked) path.style.strokeDashoffset = "0";
-      else if (isLevel3Unlocked) path.style.strokeDashoffset = "300";
-      else if (isLevel2Unlocked) path.style.strokeDashoffset = "600";
-      else path.style.strokeDashoffset = "900";
+      if (isLevel5Unlocked) path.style.strokeDashoffset = "0";
+      else if (isLevel4Unlocked) path.style.strokeDashoffset = "25";
+      else if (isLevel3Unlocked) path.style.strokeDashoffset = "50";
+      else if (isLevel2Unlocked) path.style.strokeDashoffset = "75";
+      else path.style.strokeDashoffset = "100";
 
       document.getElementById('play-level-btn').innerText = `PLAY LEVEL ${selectedLevel}`;
     }
@@ -1057,6 +1242,10 @@
       } else if (lvl === 4) {
         hideAll();
         document.getElementById('stage-record').classList.remove('hidden');
+      } else if (lvl === 5) {
+        hideAll();
+        document.getElementById('stage-cover').classList.remove('hidden');
+        updateCoverPreview();
       }
     }
 
@@ -1068,6 +1257,7 @@
       document.getElementById('sim-role-selection').classList.remove('hidden');
       document.getElementById('sim-options-container').classList.add('hidden');
       document.getElementById('sim-results').classList.add('hidden');
+      document.getElementById('sim-continue-btn').classList.add('hidden');
       document.getElementById('btn-role-host').classList.remove('selected');
       document.getElementById('btn-role-guest').classList.remove('selected');
       document.getElementById('npc-text').innerText = '"Hello! I\'m Alex. Welcome to MNS Podcast Studio! Today we will practice podcasting. What role would you like to take?"';
@@ -1096,7 +1286,6 @@
       currentData.options.forEach((optObj) => {
         const btn = document.createElement('button');
         btn.className = 'btn-pill';
-        // Tampilkan teks opsi saja tanpa nilai poin eksplisit
         btn.innerText = optObj.text;
         btn.onclick = () => chooseSimOption(optObj.pts, btn);
         optsContainer.appendChild(btn);
@@ -1132,13 +1321,17 @@
       document.getElementById('sim-results').classList.remove('hidden');
       document.getElementById('npc-text').innerText = '"Great job completing the simulation with me!"';
 
-      document.getElementById('sim-score-text').innerText = `Score: ${simTotalScore} / 9 Points`;
+      document.getElementById('sim-score-text').innerText = `Score: ${simTotalScore} / 15 Points`;
       
-      let feedback = "Great effort! You are getting better at podcasting!";
-      if (simTotalScore >= 8) feedback = "🌟 Excellent! Outstanding communication and hosting skills!";
-      else if (simTotalScore >= 6) feedback = "👍 Good job! Very natural and engaging dialogue!";
-      
-      document.getElementById('sim-feedback-text').innerText = feedback;
+      const continueBtn = document.getElementById('sim-continue-btn');
+
+      if (simTotalScore >= 10) {
+        document.getElementById('sim-feedback-text').innerText = "🌟 Outstanding! You reached the passing score (Min 10 Points). You can now unlock Level 3!";
+        continueBtn.classList.remove('hidden');
+      } else {
+        document.getElementById('sim-feedback-text').innerText = "⚠️ You scored less than 10 points! Please retry the simulation and select more engaging responses to unlock Level 3.";
+        continueBtn.classList.add('hidden');
+      }
     }
 
     function completeLevel2() {
@@ -1186,8 +1379,8 @@
     function loadQuizQuestion() {
       const q = quizData[currentQuizIndex];
       
-      document.getElementById('counter-display').innerText = `${currentQuizIndex + 1}/15`;
-      document.getElementById('progress-bar').style.width = `${((currentQuizIndex + 1) / 15) * 100}%`;
+      document.getElementById('counter-display').innerText = `${currentQuizIndex + 1}/30`;
+      document.getElementById('progress-bar').style.width = `${((currentQuizIndex + 1) / 30) * 100}%`;
       document.getElementById('quiz-question').innerText = q.q;
 
       const optsContainer = document.getElementById('quiz-options');
@@ -1236,7 +1429,7 @@
 
     function finishQuiz() {
       hideAll();
-      if (totalScore >= 8) {
+      if (totalScore >= 16) {
         playSfx('win');
         isLevel2Unlocked = true;
         selectedLevel = 2;
@@ -1244,7 +1437,7 @@
       } else {
         playSfx('wrong');
         document.getElementById('stage-lost').classList.remove('hidden');
-        document.getElementById('lost-score-text').innerText = `You got only ${totalScore} marks! (Need 8 to unlock Level 2)`;
+        document.getElementById('lost-score-text').innerText = `You got only ${totalScore} marks! (Need 16 to unlock Level 2)`;
       }
     }
 
@@ -1270,43 +1463,32 @@
       showMap();
     }
 
-    /* LEVEL 4: RECORDING LOGIC */
-    async function toggleRecording() {
+    function completeLevel4() {
+      playSfx('win');
+      isLevel5Unlocked = true;
+      selectedLevel = 5;
+      showMap();
+    }
+
+    /* LEVEL 5: COVER DESIGN LOGIC */
+    function updateCoverPreview() {
+      const title = document.getElementById('cover-title-input').value.trim() || 'Junior Podcaster';
+      document.getElementById('cover-title-display').innerText = title;
+    }
+
+    function setCoverTheme(theme, btn) {
       playSfx('click');
-      const recordBtn = document.getElementById('record-btn');
+      document.querySelectorAll('#stage-cover .mixer-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
-      if (!isRecording) {
-        try {
-          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-          mediaRecorder = new MediaRecorder(stream);
-          audioChunks = [];
-
-          mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
-          mediaRecorder.onstop = () => {
-            audioBlob = new Blob(audioChunks, { type: 'audio/mp3' });
-            const player = document.getElementById('audio-player');
-            player.src = URL.createObjectURL(audioBlob);
-            player.classList.remove('hidden');
-          };
-
-          mediaRecorder.start();
-          isRecording = true;
-          recordBtn.innerText = "⏹️ Stop Recording";
-        } catch (err) {
-          alert("Microphone access required!");
-        }
-      } else {
-        mediaRecorder.stop();
-        isRecording = false;
-        recordBtn.innerText = "🔄 Re-record Voice";
-        document.getElementById('publish-btn').classList.remove('hidden');
-      }
+      const box = document.getElementById('cover-preview-box');
+      box.className = 'cover-card-preview cover-theme-' + theme;
     }
 
     function publishPodcast() {
       hideAll();
       document.getElementById('stage-win').classList.remove('hidden');
-      document.getElementById('win-score-text').innerText = `Your total Quiz score : ${totalScore} out of 15`;
+      document.getElementById('win-score-text').innerText = `Your total Quiz score : ${totalScore} out of 30`;
     }
   </script>
 </body>
